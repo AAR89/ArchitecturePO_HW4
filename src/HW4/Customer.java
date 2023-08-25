@@ -49,7 +49,7 @@ public class Customer {
     public List<Ticket> search(long rootNumber) {
         for (Ticket ticket : tickets
         )
-            if (tickets.equals(rootNumber)) {
+            if (tickets.contains(rootNumber)) {
                 System.out.println(ticket); // не работает, выдаёт пустой массив
             }
         return new ArrayList<>();
