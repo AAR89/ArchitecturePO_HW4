@@ -10,7 +10,8 @@ public class Customer extends TicketProvider {
 
     private List<Customer> customerList = new ArrayList<>();
     private List<Ticket> ticketsListCustomer = new ArrayList<>();
-    private CashProvider cashProvaider = new CashProvider();
+    private CashProvider cashProvider = new CashProvider();
+
 
     public Customer () {};
 
@@ -49,16 +50,16 @@ public class Customer extends TicketProvider {
 
         for (Customer customer : customerList) {
             if (customer.getId() == idUser) {
-                // cashProvaider.openCardCustomer(idUser, numberCard, balanceCard);
-                customer.user.setCard(cashProvaider.openCardCustomer(idUser, numberCard, balanceCard));
+                // cashProvider.openCardCustomer(idUser, numberCard, balanceCard);
+                customer.user.setCard(cashProvider.openCardCustomer(idUser, numberCard, balanceCard));
             }
         }
     }
 
     public double cardBalance(int idUser) {
-        // cashProvaider = new CashProvider();
+        // cashProvider = new CashProvider();
         try {
-            return cashProvaider.balanceCardCustomer(idUser);
+            return cashProvider.balanceCardCustomer(idUser);
 
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
