@@ -11,7 +11,6 @@ public class User {
     private List<Ticket> userTickets = new ArrayList<>();
 
     public User(int id, String userName) {
-        // this.id = getUserId() + 1;
         this.id = id;
         this.userName = userName;
     }

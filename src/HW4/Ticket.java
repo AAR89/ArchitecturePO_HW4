@@ -1,13 +1,10 @@
 package HW4;
 
-import java.time.LocalDateTime;
-
 public class Ticket {
 
     private long rootNumber;
     private double price;
     private int place;
-    // public LocalDateTime date;
     private boolean isValid;
 
     public long getRootNumber() {
@@ -30,10 +27,6 @@ public class Ticket {
         this.place = place;
     }
 
-    // public LocalDateTime getDate() {
-    //     return date;
-    // }
-
     public boolean isValid() {
         return isValid;
     }
@@ -42,8 +35,6 @@ public class Ticket {
         this.isValid = isValid;
 
     }
-
-    public Ticket() {};
 
     public Ticket(long rootNumber, double price, int place, boolean isValid) {
         this.rootNumber = rootNumber;
@@ -57,6 +48,4 @@ public class Ticket {
     public String toString() {
         return "Ticket [rootNumber=" + rootNumber + ", price=" + price + ", place=" + place + ", isValid=" + isValid + "]";
     }
-
-
 }

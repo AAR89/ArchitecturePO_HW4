@@ -10,7 +10,6 @@ public class CashProvider {
 
     public Card openCardCustomer(int idUser, int cardNumber, double balance) {
         card = new Card(idUser, cardNumber, balance);
-        // listCardCustomer = new ArrayList<>();
         listCardCustomer.add(card);
         return card;
     }

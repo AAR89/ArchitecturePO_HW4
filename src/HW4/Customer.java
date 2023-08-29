@@ -50,14 +50,12 @@ public class Customer extends TicketProvider {
 
         for (Customer customer : customerList) {
             if (customer.getId() == idUser) {
-                // cashProvider.openCardCustomer(idUser, numberCard, balanceCard);
                 customer.user.setCard(cashProvider.openCardCustomer(idUser, numberCard, balanceCard));
             }
         }
     }
 
     public double cardBalance(int idUser) {
-        // cashProvider = new CashProvider();
         try {
             return cashProvider.balanceCardCustomer(idUser);
 
