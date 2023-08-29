@@ -2,61 +2,61 @@ package HW4;
 
 import java.time.LocalDateTime;
 
-class Ticket {
-    private long rootNumber;
-    private String type;
-    private Double price;
-    private String place;
-    private LocalDateTime date;
-    private boolean isValid;
+public class Ticket {
 
-    public Ticket(long rootNumber, String type, Double price, String place, LocalDateTime date) {
-        this.rootNumber = rootNumber;
-        this.type = type;
-        this.price = price;
-        this.place = place;
-        this.date = date;
-        this.isValid = true;
-    }
+    private long rootNumber;
+    private double price;
+    private int place;
+    // public LocalDateTime date;
+    private boolean isValid;
 
     public long getRootNumber() {
         return rootNumber;
     }
 
-    public String getType() {
-        return type;
+    public void setRootNumber(long rootNumber) {
+        this.rootNumber = rootNumber;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public String getPlace() {
+    public int getPlace() {
         return place;
     }
 
-
-    public LocalDateTime getDate() {
-        return date;
+    public void setPlace(int place) {
+        this.place = place;
     }
 
-    @Override
-    public String toString() {
-        return "Ticket{" +
-                "rootNumber = " + rootNumber +
-                ", type = " + type +
-                ", price = " + price +
-                ", place = " + place +
-                ", date = " + date +
-                ", isValid = " + isValid +
-                '}';
-    }
+    // public LocalDateTime getDate() {
+    //     return date;
+    // }
 
     public boolean isValid() {
         return isValid;
     }
 
-    public void cancel() {
-        isValid = false;
+    public void setValid(boolean isValid) {
+        this.isValid = isValid;
+
     }
+
+    public Ticket() {};
+
+    public Ticket(long rootNumber, double price, int place, boolean isValid) {
+        this.rootNumber = rootNumber;
+        this.price = price;
+        this.place = place;
+        // this.date = date;
+        this.isValid = isValid;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket [rootNumber=" + rootNumber + ", price=" + price + ", place=" + place + ", isValid=" + isValid + "]";
+    }
+
+
 }

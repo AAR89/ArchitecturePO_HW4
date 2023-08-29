@@ -1,35 +1,42 @@
 package HW4;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CashProvider {
-    private long card;
-    private long hashCard;
-    private boolean isAuthorization;
 
-    public CashProvider(long card, long hashCard) {
-        this.card = card;
-        this.hashCard = hashCard;
-        this.isAuthorization = false;
+    private Card card;
+    private List<Card> listCardCustomer = new ArrayList<>();
+
+    public Card openCardCustomer(int idUser, int cardNumber, double balance) {
+        card = new Card(idUser, cardNumber, balance);
+        // listCardCustomer = new ArrayList<>();
+        listCardCustomer.add(card);
+        return card;
     }
 
-    public void authorization(Customer customer) {
-        isAuthorization = true;
-        if (customer.getId() == null) {
-            isAuthorization = false;
+    public double balanceCardCustomer(int customerId) throws RuntimeException {
+
+        for (Card card : listCardCustomer) {
+            if (card.getIdUser() == customerId) {
+                return card.getBalanceCard();
+            }
         }
+        throw new RuntimeException("Нет такого покупателя");
     }
 
-    public boolean buy(Double amount, Double price) {
-        if (isAuthorization && cardHasFunds(amount, price)) {
-            return true;
-        } else {
-            return false;
+    public Card searchCardCustomer(int customerId) {
+
+        for (Card card : listCardCustomer) {
+            if (card.getIdUser() == customerId) {
+                return card;
+            }
         }
+        return null;
     }
 
-    public boolean cardHasFunds(Double amount, Double price) {
-        if (amount != null && amount >= price) {
-            return true;
-        }
-        return false;
+    public void transactionMinus(double cash) {
+        card.setBalanceCard(card.getBalanceCard() - cash);
     }
+
 }

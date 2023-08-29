@@ -1,57 +1,90 @@
 package HW4;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Customer {
-    private Integer id;
-    private List<Ticket> tickets;
-    private List<Integer> customers;
-    private Double cash;
+public class Customer extends TicketProvider {
 
-    public Customer(int id, Double cash) {
-        this.id = id;
-        this.tickets = new ArrayList<>();
-        this.customers = new ArrayList<>();
-        this.cash = cash;
+    private int id;
+    private User user;
+
+    private List<Customer> customerList = new ArrayList<>();
+    private List<Ticket> ticketsListCustomer = new ArrayList<>();
+    private CashProvider cashProvaider = new CashProvider();
+
+    public Customer () {};
+
+    public Customer(User user) {
+        this.id = user.getUserId();
+        this.user = user;
     }
 
-    public Integer getId() {
+    public void setCustomerList (Customer customer) {
+        this.customerList.add(customer);
+    }
+
+    public List<Customer> getCustomerList() {
+        return customerList;
+    }
+
+    public User getUserCustomer() {
+        return user;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public Double setCash(Double cash) {
-        this.cash = cash;
-        return cash;
+    public boolean buyTicket(int idCustomer, int countTicket, Ticket ticket) {
+        try {
+            user.setUserTickets(sellTicketsProvider(idCustomer, countTicket, ticket));
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
-    public boolean buyTicket(Ticket ticket, Customer customer) {
-        if (cash != null && cash >= ticket.getPrice()) {
-            cash -= ticket.getPrice();
-            setCash(cash);
-            tickets.add(ticket);
-            customers.add(customer.id);
-            return true;
+    public void addCardUser(int idUser, int numberCard, double balanceCard) {
+
+        for (Customer customer : customerList) {
+            if (customer.getId() == idUser) {
+                // cashProvaider.openCardCustomer(idUser, numberCard, balanceCard);
+                customer.user.setCard(cashProvaider.openCardCustomer(idUser, numberCard, balanceCard));
+            }
         }
-        return false;
+    }
+
+    public double cardBalance(int idUser) {
+        // cashProvaider = new CashProvider();
+        try {
+            return cashProvaider.balanceCardCustomer(idUser);
+
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+            return (Double) null;
+        }
+    }
+
+    public Ticket searchTicket(long rootNumber) throws RuntimeException {
+
+        for (Ticket ticket : user.getUserTickets()) {
+            if (ticket.getRootNumber() == rootNumber) {
+                return ticket;
+            }
+        }
+        throw new RuntimeException("Нет билетов с такими данными");
     }
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", tickets=" + tickets +
-                ", cash=" + cash +
-                '}';
+        return "Customer [id=" + id + ", user=" + user + "]";
     }
 
-    public List<Ticket> search(long rootNumber) {
-        for (Ticket ticket : tickets
-        )
-            if (tickets.contains(rootNumber)) {
-                System.out.println(ticket); // не работает, выдаёт пустой массив
-            }
-        return new ArrayList<>();
+    public void printCustomerList() {
+        for (Customer customer : customerList) {
+            System.out.println(customer);
+        }
     }
+
 }

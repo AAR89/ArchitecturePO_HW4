@@ -3,26 +3,27 @@ package HW4;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketProvider {
-    private List<Ticket> availableTickets;
+public class TicketProvider extends CashProvider {
 
-    public TicketProvider() {
-        this.availableTickets = new ArrayList<>();
-    }
+    public Ticket ticket;
+    // public List<Ticket> ticketList;
 
-    public boolean addTicket(Ticket ticket) {
-        return availableTickets.add(ticket);
-    }
-
-    public boolean removeTicket(Ticket ticket) {
-        return availableTickets.remove(ticket);
-    }
-
-    public List<Ticket> getTicket(long rootNumber) {
-        return new ArrayList<>();
+    public List<Ticket> sellTicketsProvider(int customerId, int countTikets, Ticket ticket) throws Exception {
+        // ticket = new Ticket();
+        List<Ticket> ticketList = new ArrayList<>();
+        if (balanceCardCustomer(customerId) >= (ticket.getPrice() * countTikets)) {
+            transactionMinus(ticket.getPrice() * countTikets);
+            while (countTikets != 0) {
+                ticketList.add(ticket);
+                countTikets--;
+            }
+            return ticketList;
+        } else
+            throw new Exception("Недостаточно средств");
     }
 
     public boolean updateTicketStatus(Ticket ticket) {
-        return true;
+        return false;
     }
+
 }
